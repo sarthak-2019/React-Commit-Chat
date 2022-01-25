@@ -1,49 +1,47 @@
-import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createBrowserHistory } from 'history';
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { createBrowserHistory } from "history";
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { jsx } from "@emotion/core";
 
-import PrivateRoute from '../../PrivateRoute';
+import PrivateRoute from "../../PrivateRoute";
 
-import KitchenSinkApp from '../../defaultPages/KitchenSinkApp';
-import HomePage from '../../defaultPages/HomePage';
+import KitchenSinkApp from "../../defaultPages/KitchenSinkApp";
+import HomePage from "../../defaultPages/HomePage";
 
-import * as actions from '../../store/action';
-
-import {
-    CometChatUI,
-    CometChatConversationList,
-    CometChatConversationListWithMessages,
-    CometChatUserList,
-    CometChatUserListWithMessages,
-    CometChatGroupList,
-    CometChatGroupListWithMessages,
-    CometChatMessages
-} from '../../cometchat-pro-react-ui-kit/CometChatWorkspace/src';
+import * as actions from "../../store/action";
 
 import {
-    wrapperStyle
-} from "./style";
+  CometChatUI,
+  CometChatConversationList,
+  CometChatConversationListWithMessages,
+  CometChatUserList,
+  CometChatUserListWithMessages,
+  CometChatGroupList,
+  CometChatGroupListWithMessages,
+  CometChatMessages,
+} from "../../cometchat-pro-react-ui-kit/CometChatWorkspace/src";
 
+import { wrapperStyle } from "./style";
+import Sarthak from "./../../sarthak";
 const history = createBrowserHistory();
 
 class App extends React.Component {
-    state = {
-        isLoggedin: false
-    }
+  state = {
+    isLoggedin: false,
+  };
 
-    componentDidMount() {
-        this.props.getLoggedinUser();
-    }
+  componentDidMount() {
+    this.props.getLoggedinUser();
+  }
 
-    render() {
-
-        return (
-            <div css={wrapperStyle()}>
-                <Router history={history}>
+  render() {
+    return (
+      <div css={wrapperStyle()}>
+        <Sarthak />
+        {/* <Router history={history}>
                     <Switch>
                         <PrivateRoute path="/embedded-app" component={CometChatUI} />
                         <PrivateRoute path="/conversations" component={CometChatConversationListWithMessages} />
@@ -56,22 +54,22 @@ class App extends React.Component {
                         <PrivateRoute exact path="/" component={HomePage} />
                         <Route path="/login" component={KitchenSinkApp} />
                     </Switch>
-                </Router>
-            </div>
-        );
-    }
+                </Router> */}
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoggedIn: state.isLoggedIn
-    };
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getLoggedinUser: () => dispatch(actions.authCheckState())
-    };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getLoggedinUser: () => dispatch(actions.authCheckState()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
